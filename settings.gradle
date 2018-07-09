@@ -1,2 +1,3 @@
 rootProject.name = 'mutantengineapi'
+include 'application'
 
