@@ -1,7 +1,9 @@
 plugins {
     id 'java'
 }
+apply plugin: 'application'
 
+mainClassName = "team.brotherhoodofmutants.mutantengineapi.Boot"
 group 'team.brotherhoodofmutants'
 version '0.1'
 
@@ -14,4 +16,6 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    compile "com.sparkjava:spark-core:2.7.2"
+    compile "org.slf4j:slf4j-simple:1.7.21"
 }

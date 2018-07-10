@@ -1,18 +1,27 @@
 package team.brotherhoodofmutants.mutantengineapi;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import team.brotherhoodofmutants.mutantengineapi.config.Spark;
 
+//import static spark.Spark.*;
+
+import java.io.IOException;
 import java.util.*;
 
-public class Api {
+public class Boot {
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) throws IOException {
+        //get("/hello", (req, res) -> "Hello World");
+        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring.xml");
+        context.getBean(Spark.class).init();
+        //context.getBean(Spark.class).bootApi();
         //String[] dna =  {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"};
         String[] dna =  {"ATTTTA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"}; // TESTE 2 CHAIN LINES
         //String[] dna =  {"AAAAAA","CCCCCC","CCCCCC","CCCCCC","CCCCCC","TTTTTT"}; // TESTE 3 CHAIN COLUMN
 
-        Api api = new Api();
+        Boot api = new Boot();
         boolean response  = api.isMutant(dna);
         System.out.println(response);
 
