@@ -1,24 +1,21 @@
-package team.brotherhoodofmutants.mutantengineapi;
+package team.brotherhoodofmutants.mutantengine.usecase.gateways;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
+import team.brotherhoodofmutants.mutantengine.usecase.domains.ObliqueChain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class Api {
+@Component
+public class MutantGateway {
 
-    public static void main(String[] args){
-
+    public boolean isMutant(String[] dna){
         //String[] dna =  {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"};
-        String[] dna =  {"ATTTTA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"}; // TESTE 2 CHAIN LINES
+        //String[] dna =  {"ATTTTA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"}; // TESTE 2 CHAIN LINES
         //String[] dna =  {"AAAAAA","CCCCCC","CCCCCC","CCCCCC","CCCCCC","TTTTTT"}; // TESTE 3 CHAIN COLUMN
 
-        Api api = new Api();
-        boolean response  = api.isMutant(dna);
-        System.out.println(response);
-
-    }
-
-    private boolean isMutant(String[] dna){
         //PRE-ANALISE DAS CADEIAS
 //1. checagem da quantidade de cadeias: não podem ser menor que 4 ok
 //2. verificar se existe algum outro caracter diferente de ATGC
@@ -150,18 +147,17 @@ public class Api {
     private static int executeLoop(List<ObliqueChain> obliqueChains){
         int sameSequence = 0;
         int countBySameNucleotide = 0;
-            for (int iL = 0; iL < obliqueChains.size(); iL++) {
-                for (int iC = 0; iC < obliqueChains.size(); iC++) {
-                    if(obliqueChains.get(iL).getLine() == obliqueChains.get(iC).getLine() &&
-                            obliqueChains.get(iL).getNucleotide() == obliqueChains.get(iC).getNucleotide()){
-                        countBySameNucleotide++;
+        for (int iL = 0; iL < obliqueChains.size(); iL++) {
+            for (int iC = 0; iC < obliqueChains.size(); iC++) {
+                if(obliqueChains.get(iL).getLine() == obliqueChains.get(iC).getLine() &&
+                        obliqueChains.get(iL).getNucleotide() == obliqueChains.get(iC).getNucleotide()){
+                    countBySameNucleotide++;
                 }
                 if (countBySameNucleotide == 4) {
-                        sameSequence++;
-                    }
+                    sameSequence++;
+                }
             }
         }
         return sameSequence;
     }
-
 }
