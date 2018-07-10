@@ -1,4 +1,4 @@
-package team.brotherhoodofmutants.mutantengineapi;
+package team.brotherhoodofmutants.mutantengine.usecase.domains;
 
 public class ObliqueChain {
     private int sequencial;
