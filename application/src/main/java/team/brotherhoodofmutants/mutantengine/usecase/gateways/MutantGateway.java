@@ -1,5 +1,7 @@
 package team.brotherhoodofmutants.mutantengine.usecase.gateways;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import team.brotherhoodofmutants.mutantengine.usecase.domains.ObliqueChain;
@@ -10,6 +12,13 @@ import java.util.List;
 
 @Component
 public class MutantGateway {
+
+    public ObjectMapper getStats(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        //Mutant car = new Car("yellow", "renault");
+        //objectMapper.writeValue(, car);
+        return objectMapper;
+    }
 
     public boolean isMutant(String[] dna){
         //String[] dna =  {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"};

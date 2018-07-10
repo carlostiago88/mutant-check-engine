@@ -7,6 +7,7 @@ import team.brotherhoodofmutants.mutantengine.usecase.gateways.MutantGateway;
 import team.brotherhoodofmutants.mutantengine.utils.JsonUtils;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 @Component
 public class Endpoints {
@@ -19,9 +20,14 @@ public class Endpoints {
     }
 
     public void setupEndpoints(){
-        get("/selectUsers/:target", (request, response) -> {
+        get("/stats", (request, response) -> {
+            return mutantGateway.getStats();
+        }, JsonUtils::toJson);
+
+        post("/mutant/", (request, response) -> {
             String dna = Chains.parse(request.params(""));
-            return mutantGateway.isMutant(dna);
+            //return mutantGateway.isMutant(dna);
+            return dna;
         }, JsonUtils::toJson);
     }
 }
