@@ -1,10 +1,11 @@
 package team.brotherhoodofmutants.mutantengine.usecase.gateways;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import team.brotherhoodofmutants.mutantengine.usecase.domains.Human;
 import team.brotherhoodofmutants.mutantengine.usecase.domains.ObliqueChain;
+import team.brotherhoodofmutants.mutantengine.usecase.services.NucleotideService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,14 +14,21 @@ import java.util.List;
 @Component
 public class MutantGateway {
 
-    public ObjectMapper getStats(){
-        ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    NucleotideService nucleotideService;
+
+    public void getStats(){
+        //ObjectMapper objectMapper = new ObjectMapper();
         //Mutant car = new Car("yellow", "renault");
         //objectMapper.writeValue(, car);
-        return objectMapper;
+        //return objectMapper;
     }
 
-    public boolean isMutant(String[] dna){
+    public boolean isMutant(Human human){
+
+        //System.out.println(chain);
+        String[] dna = human.getDna();
+
         //String[] dna =  {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"};
         //String[] dna =  {"ATTTTA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"}; // TESTE 2 CHAIN LINES
         //String[] dna =  {"AAAAAA","CCCCCC","CCCCCC","CCCCCC","CCCCCC","TTTTTT"}; // TESTE 3 CHAIN COLUMN
