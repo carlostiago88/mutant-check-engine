@@ -1,6 +1,7 @@
 package team.brotherhoodofmutants.mutantengine.restapi;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import team.brotherhoodofmutants.mutantengine.usecase.domains.Human;
@@ -10,14 +11,15 @@ import team.brotherhoodofmutants.mutantengine.utils.JsonUtils;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.Spark.redirect;
 
 @Component
-public class Endpoints {
+public class EndpointHandler {
 
     private final MutantGateway mutantGateway;
 
     @Autowired
-    public Endpoints(MutantGateway mutantGateway){
+    public EndpointHandler(MutantGateway mutantGateway){
         this.mutantGateway = mutantGateway;
     }
 

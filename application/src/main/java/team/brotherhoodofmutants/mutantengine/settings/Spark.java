@@ -2,7 +2,8 @@ package team.brotherhoodofmutants.mutantengine.settings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import team.brotherhoodofmutants.mutantengine.restapi.Endpoints;
+import team.brotherhoodofmutants.mutantengine.restapi.EndpointHandler;
+import team.brotherhoodofmutants.mutantengine.restapi.ExceptionHandler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,8 @@ import static spark.Spark.threadPool;
 public class Spark {
 
     private final Properties defaultProperties = new Properties();
-    private final Endpoints endpoints;
+    private final EndpointHandler endpointHandler;
+    private final ExceptionHandler exceptionHandler;
     private final ApiConfig apiConfig;
     private int port;
     private int threadPoolMax;
@@ -23,9 +25,10 @@ public class Spark {
     private int threadPoolIdleTimeout;
 
     @Autowired
-    public Spark(Endpoints endpoints, ApiConfig apiConfig){
-        this.endpoints = endpoints;
+    public Spark(EndpointHandler endpointHandler, ApiConfig apiConfig,ExceptionHandler exceptionHandler){
+        this.endpointHandler = endpointHandler;
         this.apiConfig = apiConfig;
+        this.exceptionHandler = exceptionHandler;
     };
 
     public void init() throws IOException{
@@ -34,7 +37,8 @@ public class Spark {
         port(apiConfig.getPort());
         threadPool(apiConfig.getThreadPoolMax(), apiConfig.getThreadPoolMin(), apiConfig.getThreadPoolIdleTimeout());
 
-        endpoints.setupEndpoints();
+        endpointHandler.setupEndpoints();
+        exceptionHandler.setupExceptionHandlers();
     }
 
     private void registerParams() throws IOException{
