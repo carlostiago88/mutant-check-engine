@@ -35,10 +35,13 @@ public class Endpoints {
             //return new Gson().toJson(new StandardResponse(StatusResponse.SUCCESS));
         });*/
 
+        //String[] dna =  {"ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"};
+        //String[] dna =  {"ATTTTA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"}; // TESTE 2 CHAIN LINES
+        //String[] dna =  {"AAAAAA","CCCCCC","CCCCCC","CCCCCC","CCCCCC","TTTTTT"}; // TESTE 3 CHAIN COLUMN
         post("/mutant", (request, response) -> {
             response.type("application/json");
             Human human = new Gson().fromJson(request.body(), Human.class);
-            if(mutantGateway.isMutant(human)){
+            if(mutantGateway.checkIsMutantFor(human)){
                 response.status(200);
                 response.body("YES");
             }else{
