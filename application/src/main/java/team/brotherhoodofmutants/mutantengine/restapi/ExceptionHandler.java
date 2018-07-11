@@ -9,6 +9,7 @@ import team.brotherhoodofmutants.mutantengine.usecase.exceptions.NucleotideExcep
 import team.brotherhoodofmutants.mutantengine.utils.JsonUtils;
 
 import java.io.IOException;
+import java.io.StringWriter;
 
 import static java.util.Collections.singletonMap;
 import static spark.Spark.exception;
@@ -18,7 +19,7 @@ import static team.brotherhoodofmutants.mutantengine.utils.JsonUtils.toJson;
 @Component
 public class ExceptionHandler {
 
-    //private static final JsonUtils json = new JsonUtils();
+    private static ObjectMapper mapper = new ObjectMapper();
 
     public void setupExceptionHandlers(){
 

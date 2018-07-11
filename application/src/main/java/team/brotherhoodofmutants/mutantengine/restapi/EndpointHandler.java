@@ -1,19 +1,23 @@
 package team.brotherhoodofmutants.mutantengine.restapi;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import team.brotherhoodofmutants.mutantengine.usecase.domains.Human;
+import team.brotherhoodofmutants.mutantengine.usecase.enums.HumanType;
 import team.brotherhoodofmutants.mutantengine.usecase.gateways.MutantGateway;
 import team.brotherhoodofmutants.mutantengine.utils.JsonUtils;
 
+import static java.util.Collections.singletonMap;
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static team.brotherhoodofmutants.mutantengine.utils.JsonUtils.toJson;
 
 @Component
 public class EndpointHandler {
 
     private final MutantGateway mutantGateway;
-    private static final JsonUtils json = new JsonUtils();
+    private static ObjectMapper mapper = new ObjectMapper();
 
 
     @Autowired
@@ -30,15 +34,14 @@ public class EndpointHandler {
         }, JsonUtils::toJson);
         post("/mutant", (request, response) -> {
             response.type("application/json");
-            Human human = json.toClass(request.body(), Human.class);
+            Human human = mapper.readValue(request.body(), Human.class);
             if(mutantGateway.checkIsMutantFor(human)){
                 response.status(200);
-                response.body("YES");
+                return toJson(singletonMap("isMutant",HumanType.IS_MUTANT.getStatus()));
             }else{
                 response.status(403);
-                response.body("NO");
+                return toJson(singletonMap("isMutant",HumanType.IS_NOT_MUTANT.getStatus()));
             }
-            return response;
-        }, JsonUtils::toJson);
+        });
     }
 }
