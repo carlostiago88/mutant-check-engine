@@ -1,6 +1,11 @@
 package team.brotherhoodofmutants.mutantengine.usecase.domains;
 
-public class Human {
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+import java.io.Serializable;
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class Human implements Serializable {
 
     private String[] dna;
 

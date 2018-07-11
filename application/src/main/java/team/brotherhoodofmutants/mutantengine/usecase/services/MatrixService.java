@@ -14,12 +14,14 @@ import java.util.Arrays;
 public class MatrixService {
 
     private void isValidDnaChain(String[] dna) {
+        if(dna == null)
+            throw new MatrixException("DNA Matrix is empty");
         if (dna.length < 4)
-            throw new MatrixException("Matrix length is wrong");
+            throw new MatrixException("DNA Matrix length is wrong");
         if (!Arrays.stream(dna).allMatch(x -> StringUtils.containsOnly(x, Nucleotide.TYPES.getTypes())))
             throw new NucleotideException("Nucleotide Types: A|T|C|G");
         if (!Arrays.stream(dna).allMatch(x -> x.length() == dna.length))
-            throw new MatrixException("Size of columns and lines must be same");
+            throw new MatrixException("Size of columns and lines from DNA MAtrix must be same");
     }
 
     public Matrix mountMatrixFor(Human human) throws NucleotideException, MatrixException{
