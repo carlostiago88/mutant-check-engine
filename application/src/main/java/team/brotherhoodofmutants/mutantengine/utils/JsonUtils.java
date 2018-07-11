@@ -4,25 +4,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
-    public class JsonUtils {
+public class JsonUtils {
 
-        private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
 
-        static {
-            MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
-        }
-
-        public static String toJson(Object data) {
-            try {
-                StringWriter sw = new StringWriter();
-                MAPPER.writeValue(sw, data);
-                sw.close();
-                return sw.toString();
-            } catch (IOException e) {
-                throw new RuntimeException("Error converting " + data.toString() + " to json", e);
-            }
-        }
-
+    static {
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
+
+    public static <T> String toJson(T o) {
+        try {
+            return mapper.writeValueAsString(o);
+        } catch (IOException e) {
+            throw new RuntimeException("Error converting " + o.toString() + " to json", e);
+        }
+    }
+
+    public static <T> T toClass(String json, Class<T> clazz) throws IOException {
+        return mapper.readValue(json, clazz);
+    }
+}
