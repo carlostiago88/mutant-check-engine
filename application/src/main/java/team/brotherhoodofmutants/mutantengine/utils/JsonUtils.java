@@ -21,9 +21,7 @@ public class JsonUtils {
         }
     }
 
-    public <T> T toClass(String json, Class<T> clazz) throws IOException {
+    public static <T> T toClass(String json, Class<T> clazz) throws IOException {
         return mapper.readValue(json, clazz);
     }
-
-
 }

@@ -1,7 +1,7 @@
 package team.brotherhoodofmutants.mutantengine.usecase.enums;
 
 public enum HumanType {
-    IS_MUTANT("Do you want to join us, Brotherhood of Mutants?"), IS_NOT_MUTANT("Sorry, Magneto. You're wrong");
+    IS_MUTANT("Do you want to join us, Brotherhood of Mutants?"), IS_NOT_MUTANT("I'm sorry for the inconvenience. Bye weak human!");
 
     private String status;
 
