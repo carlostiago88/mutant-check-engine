@@ -1,4 +1,4 @@
-package team.brotherhoodofmutants.mutantengine.usecase.exceptions;
+package team.brotherhoodofmutants.mutantengine.core.exceptions;
 
 public class NucleotideException extends RuntimeException {
 

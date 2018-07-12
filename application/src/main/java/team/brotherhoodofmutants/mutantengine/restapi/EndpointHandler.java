@@ -2,16 +2,16 @@ package team.brotherhoodofmutants.mutantengine.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.Human;
-import team.brotherhoodofmutants.mutantengine.usecase.enums.HumanType;
-import team.brotherhoodofmutants.mutantengine.usecase.gateways.MutantGateway;
-import team.brotherhoodofmutants.mutantengine.utils.JsonUtils;
+import team.brotherhoodofmutants.mutantengine.core.entity.Human;
+import team.brotherhoodofmutants.mutantengine.core.entity.HumanType;
+import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.gateways.MutantGateway;
+import team.brotherhoodofmutants.mutantengine.configuration.utils.JsonUtils;
 
 import static java.util.Collections.singletonMap;
 import static spark.Spark.get;
 import static spark.Spark.post;
-import static team.brotherhoodofmutants.mutantengine.utils.JsonUtils.toClass;
-import static team.brotherhoodofmutants.mutantengine.utils.JsonUtils.toJson;
+import static team.brotherhoodofmutants.mutantengine.configuration.utils.JsonUtils.toClass;
+import static team.brotherhoodofmutants.mutantengine.configuration.utils.JsonUtils.toJson;
 
 @Component
 public class EndpointHandler {

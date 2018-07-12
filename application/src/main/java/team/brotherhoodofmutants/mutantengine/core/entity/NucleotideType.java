@@ -1,11 +1,11 @@
-package team.brotherhoodofmutants.mutantengine.usecase.enums;
+package team.brotherhoodofmutants.mutantengine.core.entity;
 
-public enum Nucleotide {
+public enum NucleotideType {
         TYPES("ACGT");
 
         private final String fieldDescription;
 
-        private Nucleotide(String value) {
+        private NucleotideType(String value) {
                 fieldDescription = value;
         }
 

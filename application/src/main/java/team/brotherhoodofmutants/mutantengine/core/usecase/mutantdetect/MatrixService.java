@@ -1,12 +1,12 @@
-package team.brotherhoodofmutants.mutantengine.usecase.services;
+package team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.Human;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.Matrix;
-import team.brotherhoodofmutants.mutantengine.usecase.enums.Nucleotide;
-import team.brotherhoodofmutants.mutantengine.usecase.exceptions.MatrixException;
-import team.brotherhoodofmutants.mutantengine.usecase.exceptions.NucleotideException;
+import team.brotherhoodofmutants.mutantengine.core.entity.Human;
+import team.brotherhoodofmutants.mutantengine.core.entity.Matrix;
+import team.brotherhoodofmutants.mutantengine.core.entity.NucleotideType;
+import team.brotherhoodofmutants.mutantengine.core.exceptions.MatrixException;
+import team.brotherhoodofmutants.mutantengine.core.exceptions.NucleotideException;
 
 import java.util.Arrays;
 
@@ -18,19 +18,17 @@ public class MatrixService {
             throw new MatrixException("DNA Matrix is empty");
         if (dna.length < 4)
             throw new MatrixException("DNA Matrix length is wrong");
-        if (!Arrays.stream(dna).allMatch(x -> StringUtils.containsOnly(x, Nucleotide.TYPES.getTypes())))
-            throw new NucleotideException("Nucleotide Types: A|T|C|G");
+        if (!Arrays.stream(dna).allMatch(x -> StringUtils.containsOnly(x, NucleotideType.TYPES.getTypes())))
+            throw new NucleotideException("NucleotideType Types: A|T|C|G");
         if (!Arrays.stream(dna).allMatch(x -> x.length() == dna.length))
             throw new MatrixException("Size of columns and lines from DNA MAtrix must be same");
     }
 
     public Matrix mountMatrixFor(Human human) throws NucleotideException, MatrixException{
         String[] dna = human.getDna();
-
         isValidDnaChain(dna);
 
         Matrix matrix = new Matrix();
-
         matrix.setLines(dna[0].length());
         matrix.setColumns(dna.length);
 
@@ -41,7 +39,6 @@ public class MatrixService {
             }
         }
         matrix.setValues(elements);
-
         return matrix;
     }
 }
