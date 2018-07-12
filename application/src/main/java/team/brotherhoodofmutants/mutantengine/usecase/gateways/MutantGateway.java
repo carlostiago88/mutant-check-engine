@@ -7,6 +7,9 @@ import team.brotherhoodofmutants.mutantengine.usecase.domains.Matrix;
 import team.brotherhoodofmutants.mutantengine.usecase.services.ChainProcessorService;
 import team.brotherhoodofmutants.mutantengine.usecase.services.MatrixService;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @Component
 public class MutantGateway {
 
@@ -24,21 +27,13 @@ public class MutantGateway {
     }
 
     public boolean checkIsMutantFor(Human human) throws Exception{
-        int countSequence = 0;
-
         Matrix matrix = matrixService.mountMatrixFor(human);
+        return chainProcessorService.getSequentialCount(matrix) > 1;
+    }
 
-        //Todo: More Efficiency with change to Assync Execution
-        countSequence = countSequence+ chainProcessorService.processorByLine(matrix);
-        System.out.println("processorByLine:"+countSequence);
-        countSequence = countSequence+ chainProcessorService.processorByColumn(matrix);
-        System.out.println("processorByColumn:"+countSequence);
-        countSequence = countSequence+ chainProcessorService.processorByObliqueLeft(matrix);
-        System.out.println("processorByObliqueLeft:"+countSequence);
-        countSequence = countSequence+ chainProcessorService.processorByObliqueRight(matrix);
-        System.out.println("processorByObliqueRight:"+countSequence);
-
-        return countSequence > 1;
+    public boolean parallelCheckIsMutantFor(Human human) throws Exception{
+        Matrix matrix = matrixService.mountMatrixFor(human);
+        return chainProcessorService.getParallelCount(matrix) > 1;
     }
 
 }

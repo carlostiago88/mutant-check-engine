@@ -29,7 +29,18 @@ public class EndpointHandler {
             mutantGateway.getStats();
             return true;
         }, JsonUtils::toJson);
-        post("/mutant", (request, response) -> {
+        post("/mutant/", (request, response) -> {
+            response.type("application/json");
+            Human human = toClass(request.body(), Human.class);
+            if(mutantGateway.parallelCheckIsMutantFor(human)){
+                response.status(200);
+                return toJson(singletonMap("isMutant",HumanType.IS_MUTANT.getStatus()));
+            }else{
+                response.status(403);
+                return toJson(singletonMap("isMutant",HumanType.IS_NOT_MUTANT.getStatus()));
+            }
+        });
+        post("/mutant-sequential/", (request, response) -> {
             response.type("application/json");
             Human human = toClass(request.body(), Human.class);
             if(mutantGateway.checkIsMutantFor(human)){
