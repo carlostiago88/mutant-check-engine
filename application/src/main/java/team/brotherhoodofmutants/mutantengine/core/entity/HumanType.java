@@ -1,7 +1,7 @@
 package team.brotherhoodofmutants.mutantengine.core.entity;
 
 public enum HumanType {
-    IS_MUTANT("Do you want to join us, Brotherhood of Mutants?"), IS_NOT_MUTANT("I'm sorry for the inconvenience. Bye weak human!");
+    IS_MUTANT("Do you want to join us, Brotherhood of Mutants?"), IS_NOT_MUTANT("Sorry for the inconvenience. Bye weak human!");
 
     private String status;
 

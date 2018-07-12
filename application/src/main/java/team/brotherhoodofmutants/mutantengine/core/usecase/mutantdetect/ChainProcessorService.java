@@ -21,7 +21,7 @@ public class ChainProcessorService {
         return countSequence;
     }
 
-    public int getParallelCount(Matrix matrix) throws InterruptedException {
+    public synchronized int getParallelCount(Matrix matrix) throws InterruptedException {
         ExecutorService executor = Executors.newWorkStealingPool();
 
         List<Callable<Integer>> processors = Arrays.asList(
@@ -38,7 +38,6 @@ public class ChainProcessorService {
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-
                 }).sum();
     }
 
