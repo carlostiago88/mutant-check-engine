@@ -7,9 +7,6 @@ import team.brotherhoodofmutants.mutantengine.usecase.domains.Matrix;
 import team.brotherhoodofmutants.mutantengine.usecase.services.ChainProcessorService;
 import team.brotherhoodofmutants.mutantengine.usecase.services.MatrixService;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 @Component
 public class MutantGateway {
 
