@@ -1,8 +1,8 @@
-package team.brotherhoodofmutants.mutantengine.usecase.services;
+package team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect;
 
 import org.springframework.stereotype.Service;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.Matrix;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.ObliqueChain;
+import team.brotherhoodofmutants.mutantengine.core.entity.Matrix;
+import team.brotherhoodofmutants.mutantengine.core.entity.ObliqueChain;
 
 import java.util.*;
 import java.util.concurrent.Callable;

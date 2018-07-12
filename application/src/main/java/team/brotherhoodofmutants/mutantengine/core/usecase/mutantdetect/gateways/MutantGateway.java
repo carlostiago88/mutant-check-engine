@@ -1,11 +1,11 @@
-package team.brotherhoodofmutants.mutantengine.usecase.gateways;
+package team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.gateways;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.Human;
-import team.brotherhoodofmutants.mutantengine.usecase.domains.Matrix;
-import team.brotherhoodofmutants.mutantengine.usecase.services.ChainProcessorService;
-import team.brotherhoodofmutants.mutantengine.usecase.services.MatrixService;
+import team.brotherhoodofmutants.mutantengine.core.entity.Human;
+import team.brotherhoodofmutants.mutantengine.core.entity.Matrix;
+import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.ChainProcessorService;
+import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.MatrixService;
 
 @Component
 public class MutantGateway {
