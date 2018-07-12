@@ -1,8 +1,7 @@
-package team.brotherhoodofmutants.mutantengine;
+package team.brotherhoodofmutants.mutantengine.configuration;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import team.brotherhoodofmutants.mutantengine.settings.Spark;
 
 import java.io.IOException;
 
