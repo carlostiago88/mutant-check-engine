@@ -29,7 +29,7 @@ public class EndpointHandler {
             mutantGateway.getStats();
             return true;
         }, JsonUtils::toJson);
-        post("/mutant/", (request, response) -> {
+        post("/mutant", (request, response) -> {
             response.type("application/json");
             Human human = toClass(request.body(), Human.class);
             if(mutantGateway.parallelCheckIsMutantFor(human)){
