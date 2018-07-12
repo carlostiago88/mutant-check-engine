@@ -17,10 +17,6 @@ public class MutantGateway {
     ChainProcessorService chainProcessorService;
 
     public void getStats(){
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //Mutant car = new Car("yellow", "renault");
-        //objectMapper.writeValue(, car);
-        //return objectMapper;
     }
 
     public boolean checkIsMutantFor(Human human) throws Exception{
