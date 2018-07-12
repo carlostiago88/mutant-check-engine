@@ -1,4 +1,4 @@
-package team.brotherhoodofmutants.mutantengine.core.exceptions;
+package team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.exceptions;
 
 public class InternalServerErrorException extends RuntimeException {
 

@@ -2,13 +2,17 @@ package team.brotherhoodofmutants.mutantengine.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import spark.Response;
 import team.brotherhoodofmutants.mutantengine.core.entity.Human;
 import team.brotherhoodofmutants.mutantengine.core.entity.HumanType;
 import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.gateways.MutantGateway;
-import team.brotherhoodofmutants.mutantengine.configuration.utils.JsonUtils;
+
+import java.util.List;
+import java.util.Map;
 
 import static java.util.Collections.singletonMap;
 import static spark.Spark.get;
+import static spark.Spark.path;
 import static spark.Spark.post;
 import static team.brotherhoodofmutants.mutantengine.configuration.utils.JsonUtils.toClass;
 import static team.brotherhoodofmutants.mutantengine.configuration.utils.JsonUtils.toJson;
@@ -25,31 +29,34 @@ public class EndpointHandler {
 
     public void setupEndpoints(){
 
-        get("/stats", (request, response) -> {
-            mutantGateway.getStats();
-            return true;
-        }, JsonUtils::toJson);
-        post("/mutant", (request, response) -> {
-            response.type("application/json");
-            Human human = toClass(request.body(), Human.class);
-            if(mutantGateway.parallelCheckIsMutantFor(human)){
-                response.status(200);
-                return toJson(singletonMap("isMutant",HumanType.IS_MUTANT.getStatus()));
-            }else{
-                response.status(403);
-                return toJson(singletonMap("isMutant",HumanType.IS_NOT_MUTANT.getStatus()));
-            }
+        path("/api/v1", () -> {
+            post("/mutant", (request, response) -> {
+                Human human = toClass(request.body(), Human.class);
+                HumanType humanType = mutantGateway.checkIsMutantFor(human);
+                return mountedResponse(humanType, response);
+            });
         });
-        post("/mutant-sequential/", (request, response) -> {
-            response.type("application/json");
-            Human human = toClass(request.body(), Human.class);
-            if(mutantGateway.checkIsMutantFor(human)){
-                response.status(200);
-                return toJson(singletonMap("isMutant",HumanType.IS_MUTANT.getStatus()));
-            }else{
-                response.status(403);
-                return toJson(singletonMap("isMutant",HumanType.IS_NOT_MUTANT.getStatus()));
-            }
+        path("/api/v2", () -> {
+            get("/stats", (request, response) -> {
+                List<Map<String,Object>> resp = mutantGateway.getStats();
+                return toJson(resp);
+            });
+            post("/mutant", (request, response) -> {
+                Human human = toClass(request.body(), Human.class);
+                HumanType humanType = mutantGateway.parallelCheckIsMutantFor(human);
+                return mountedResponse(humanType, response);
+            });
         });
+    }
+
+    private String mountedResponse(HumanType humanType, Response response){
+        response.type("application/json");
+        if(humanType.equals(HumanType.IS_MUTANT)){
+            response.status(200);
+            return toJson(singletonMap("result",humanType.getStatus()));
+        }else{
+            response.status(403);
+            return toJson(singletonMap("result",humanType.getStatus()));
+        }
     }
 }

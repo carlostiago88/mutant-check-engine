@@ -2,9 +2,9 @@ package team.brotherhoodofmutants.mutantengine.restapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-import team.brotherhoodofmutants.mutantengine.core.exceptions.InternalServerErrorException;
-import team.brotherhoodofmutants.mutantengine.core.exceptions.MatrixException;
-import team.brotherhoodofmutants.mutantengine.core.exceptions.NucleotideException;
+import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.exceptions.InternalServerErrorException;
+import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.exceptions.MatrixException;
+import team.brotherhoodofmutants.mutantengine.core.usecase.mutantdetect.exceptions.NucleotideException;
 
 import static java.util.Collections.singletonMap;
 import static spark.Spark.exception;
