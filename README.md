@@ -1,40 +1,34 @@
 # Mutant Engine
 
-Magneto needs find mutants to help of Brotherhood of Mutants.
+Magneto needs find mutants to help him with Brotherhood of Mutants.
 
 For such, he must know if a human is also a mutant based in his DNA code sample only.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Do you remember from Nucleotide? So, you must send a JSON array 6x6(7x7,8x8, etc.) named dna with nucleotide: ATCG. 
 
-### Installation
+The condition rule to a normal human be mutant is: 
+The DNA chain sent must be at least 2 idential nucleotide both horizontally or vertically or oblique.
 
-```
-./gradlew build
-./gradlew run
-```
-
-### Prerequisites
-
-Send a json array 6x6 with nucleotide: ATCG.
- 
-
+> DNA CHAIN SENT
 ```
 {
-"dna":["ACTATG","TGCACA","CATGTA","GTATCG","AGGTAG","TAGCGA"]
+"dna":["ACTATG","TGCACG","CATGTG","GTATCG","AGGTTG","TAGCGA"]
 }
 ```
 
-### Endpoints
-```
-http://localhost:8080/api/v1/mutant (matrix sequential processor)
-http://localhost:8080/api/v2/mutant (matrix parallel processor)
-```
-```
-http://localhost:8080/api/v2/stats (statistics)
-```
-> working in progress
+A C T A T G
+
+**T** G C A C **G**
+
+C A **T** G T **G**
+
+G T A **T** C **G**
+
+A G G T **T** **G**
+
+T A G C G A
 
 ### Response Expected
 
@@ -55,3 +49,21 @@ Or
   "result": "Sorry for the inconvenience. Bye weak human!"
 }
 ```
+
+
+### Installation
+
+```
+./gradlew build
+./gradlew run
+```
+
+### Endpoints
+```
+http://localhost:8080/api/v1/mutant (matrix sequential processor)
+http://localhost:8080/api/v2/mutant (matrix parallel processor)
+```
+```
+http://localhost:8080/api/v2/stats (statistics)
+```
+> working in progress
