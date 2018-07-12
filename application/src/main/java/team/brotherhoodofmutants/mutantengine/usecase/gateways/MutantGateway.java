@@ -17,28 +17,16 @@ public class MutantGateway {
     ChainProcessorService chainProcessorService;
 
     public void getStats(){
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //Mutant car = new Car("yellow", "renault");
-        //objectMapper.writeValue(, car);
-        //return objectMapper;
     }
 
     public boolean checkIsMutantFor(Human human) throws Exception{
-        int countSequence = 0;
-
         Matrix matrix = matrixService.mountMatrixFor(human);
+        return chainProcessorService.getSequentialCount(matrix) > 1;
+    }
 
-        //Todo: More Efficiency with change to Assync Execution
-        countSequence = countSequence+ chainProcessorService.processorByLine(matrix);
-        System.out.println("processorByLine:"+countSequence);
-        countSequence = countSequence+ chainProcessorService.processorByColumn(matrix);
-        System.out.println("processorByColumn:"+countSequence);
-        countSequence = countSequence+ chainProcessorService.processorByObliqueLeft(matrix);
-        System.out.println("processorByObliqueLeft:"+countSequence);
-        countSequence = countSequence+ chainProcessorService.processorByObliqueRight(matrix);
-        System.out.println("processorByObliqueRight:"+countSequence);
-
-        return countSequence > 1;
+    public boolean parallelCheckIsMutantFor(Human human) throws Exception{
+        Matrix matrix = matrixService.mountMatrixFor(human);
+        return chainProcessorService.getParallelCount(matrix) > 1;
     }
 
 }
